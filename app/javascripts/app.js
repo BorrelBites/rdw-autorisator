@@ -46,9 +46,13 @@ var cmf = CarManufacturer.deployed();
 
 var index = 0;
 
-function getCarManufacturer(id){
+function getCarManufacturer(){
 
-var cmf = CarManufacturer.deployed();
+
+    id = document.getElementById('cmfid').value
+    id = parseInt(id)
+    var cmf = CarManufacturer.deployed();
+
     cmf.getCarManufacturer(id, {from: account}).then(function(value) {
         console.log(value);
     }).catch(function(e) {
@@ -57,13 +61,13 @@ var cmf = CarManufacturer.deployed();
     });
 }
 
-function createCarManufacturer(name){
+function createCarManufacturer(){
 
-    name = name;
-    
+    name = document.getElementById('cmfname').value
+
 
     cmf.createCarManufacturer(name, {from: account}).then(function() {
-        console.log("Transaction complete!");
+        console.log("Created: "+ name);
     }).catch(function(e) {
         console.log(e);
         console.log("Error creating manu");
@@ -84,7 +88,7 @@ window.onload = function() {
     }
 
     cmf.getTotalCarManufacturers.call(account, {from: account}).then(function(value){
-        console.log(value.valueOf());
+        console.log(parseInt(value.valueOf()) -1 );
     })
 
     accounts = accs;
