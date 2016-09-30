@@ -231,13 +231,13 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.new = function() {
     if (this.currentProvider == null) {
-      throw new Error("ConvertLib error: Please call setProvider() first before calling new().");
+      throw new Error("CarManufacturer error: Please call setProvider() first before calling new().");
     }
 
     var args = Array.prototype.slice.call(arguments);
 
     if (!this.unlinked_binary) {
-      throw new Error("ConvertLib error: contract binary not set. Can't deploy new instance.");
+      throw new Error("CarManufacturer error: contract binary not set. Can't deploy new instance.");
     }
 
     var regex = /__[^_]+_+/g;
@@ -256,7 +256,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         return name != arr[index + 1];
       }).join(", ");
 
-      throw new Error("ConvertLib contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of ConvertLib: " + unlinked_libraries);
+      throw new Error("CarManufacturer contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of CarManufacturer: " + unlinked_libraries);
     }
 
     var self = this;
@@ -297,7 +297,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.at = function(address) {
     if (address == null || typeof address != "string" || address.length != 42) {
-      throw new Error("Invalid address passed to ConvertLib.at(): " + address);
+      throw new Error("Invalid address passed to CarManufacturer.at(): " + address);
     }
 
     var contract_class = this.web3.eth.contract(this.abi);
@@ -308,7 +308,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.deployed = function() {
     if (!this.address) {
-      throw new Error("Cannot find deployed address: ConvertLib not deployed or address not set.");
+      throw new Error("Cannot find deployed address: CarManufacturer not deployed or address not set.");
     }
 
     return this.at(this.address);
@@ -351,31 +351,55 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     "abi": [
       {
         "constant": false,
-        "inputs": [
-          {
-            "name": "amount",
-            "type": "uint256"
-          },
-          {
-            "name": "conversionRate",
-            "type": "uint256"
-          }
-        ],
-        "name": "convert",
+        "inputs": [],
+        "name": "getTotalCarManufacturers",
         "outputs": [
           {
-            "name": "convertedAmount",
+            "name": "",
             "type": "uint256"
           }
         ],
         "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "item_id",
+            "type": "uint256"
+          }
+        ],
+        "name": "getCarManufacturer",
+        "outputs": [
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "name": "createCarManufacturer",
+        "outputs": [],
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "type": "constructor"
       }
     ],
-    "unlinked_binary": "0x606060405260358060106000396000f36503063fc68da550606060405260e060020a600035046396e4ee3d81146024575b6007565b602435600435026060908152602090f3",
+    "unlinked_binary": "0x6060604052610278806100126000396000f3606060405260e060020a6000350463345aa9c081146100315780635cb236d914610046578063cbeb5efc146100c1575b005b60005460408051918252519081900360200190f35b61019160043560408051602081810183526000808352848152600180835290849020810180548551600293821615610100026000190190911692909204601f8101849004840283018401909552848252929390929183018282801561022a5780601f106101ff5761010080835404028352916020019161022a565b61002f6004808035906020019082018035906020019191908080601f01602080910402602001604051908101604052809392919081815260200183838082843750949650505050505050806001600050600060006000505481526020019081526020016000206000506001016000509080519060200190828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061023657805160ff19168380011785555b506102669291505b80821115610274576000815560010161017d565b60405180806020018281038252838181518152602001915080519060200190808383829060006004602084601f0104600302600f01f150905090810190601f1680156101f15780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b820191906000526020600020905b81548152906001019060200180831161020d57829003601f168201915b50505050509050919050565b82800160010185558215610175579182015b82811115610175578251826000505591602001919060010190610248565b505060008054600101905550565b509056",
     "events": {},
-    "updated_at": 1475276313767,
+    "updated_at": 1475276723829,
     "links": {},
-    "address": "0x232e2a5ff049b6531a4d076472d0d9f3d8920f2f"
+    "address": "0x9d183b85a452a955bee318b1c4a395902b9a56fb"
   }
 };
 
@@ -460,7 +484,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     Contract.links[name] = address;
   };
 
-  Contract.contract_name   = Contract.prototype.contract_name   = "ConvertLib";
+  Contract.contract_name   = Contract.prototype.contract_name   = "CarManufacturer";
   Contract.generated_with  = Contract.prototype.generated_with  = "3.2.0";
 
   // Allow people to opt-in to breaking changes now.
@@ -500,6 +524,6 @@ var SolidityEvent = require("web3/lib/web3/event.js");
   } else {
     // There will only be one version of this contract in the browser,
     // and we can use that.
-    window.ConvertLib = Contract;
+    window.CarManufacturer = Contract;
   }
 })();

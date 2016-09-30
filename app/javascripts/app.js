@@ -1,39 +1,75 @@
 var accounts;
 var account;
+var cmf = CarManufacturer.deployed();
 
-function setStatus(message) {
-  var status = document.getElementById("status");
-  status.innerHTML = message;
-};
 
-function refreshBalance() {
-  var meta = MetaCoin.deployed();
+// function _g(){
+//
+//         // console.log(cmf.getTotalCarManufacturers());
+// }
 
-  meta.getBalance.call(account, {from: account}).then(function(value) {
-    var balance_element = document.getElementById("balance");
-    balance_element.innerHTML = value.valueOf();
-  }).catch(function(e) {
-    console.log(e);
-    setStatus("Error getting balance; see log.");
-  });
-};
+//
+// function setStatus(message) {
+//   var status = document.getElementById("status");
+//   status.innerHTML = message;
+// };
+//
+// function refreshBalance() {
+//   var meta = MetaCoin.deployed();
+//
+//   meta.getBalance.call(account, {from: account}).then(function(value) {
+//     var balance_element = document.getElementById("balance");
+//     balance_element.innerHTML = value.valueOf();
+//   }).catch(function(e) {
+//     console.log(e);
+//     setStatus("Error getting balance; see log.");
+//   });
+// };
+//
+// function sendCoin() {
+//   var meta = MetaCoin.deployed();
+//
+//   var amount = parseInt(document.getElementById("amount").value);
+//   var receiver = document.getElementById("receiver").value;
+//
+//   setStatus("Initiating transaction... (please wait)");
+//
+//   meta.sendCoin(receiver, amount, {from: account}).then(function() {
+//     setStatus("Transaction complete!");
+//     refreshBalance();
+//   }).catch(function(e) {
+//     console.log(e);
+//     setStatus("Error sending coin; see log.");
+//   });
+// };
+//
 
-function sendCoin() {
-  var meta = MetaCoin.deployed();
+var index = 0;
 
-  var amount = parseInt(document.getElementById("amount").value);
-  var receiver = document.getElementById("receiver").value;
+function getCarManufacturer(id){
 
-  setStatus("Initiating transaction... (please wait)");
+var cmf = CarManufacturer.deployed();
+    cmf.getCarManufacturer(id, {from: account}).then(function(value) {
+        console.log(value);
+    }).catch(function(e) {
+        console.log(e);
+        console.log("Error getting manu");
+    });
+}
 
-  meta.sendCoin(receiver, amount, {from: account}).then(function() {
-    setStatus("Transaction complete!");
-    refreshBalance();
-  }).catch(function(e) {
-    console.log(e);
-    setStatus("Error sending coin; see log.");
-  });
-};
+function createCarManufacturer(name){
+
+    name = name;
+    
+
+    cmf.createCarManufacturer(name, {from: account}).then(function() {
+        console.log("Transaction complete!");
+    }).catch(function(e) {
+        console.log(e);
+        console.log("Error creating manu");
+    });
+}
+
 
 window.onload = function() {
   web3.eth.getAccounts(function(err, accs) {
@@ -47,9 +83,11 @@ window.onload = function() {
       return;
     }
 
+    cmf.getTotalCarManufacturers.call(account, {from: account}).then(function(value){
+        console.log(value.valueOf());
+    })
+
     accounts = accs;
     account = accounts[0];
-
-    refreshBalance();
   });
 }
