@@ -3,6 +3,7 @@ var account;
 var cmf = CarManufacturer.deployed();
 var ct = CarType.deployed();
 var lp = Licenceplate.deployed();
+var su = SoftwareUpdate.deployed();
 
 var cartypes = [];
 
@@ -141,6 +142,33 @@ function createLicenceplate(){
         console.log("Error creating manu");
     });
 }
+
+function createSoftwareUpdate() {
+  name = document.getElementById('updatename').value
+  date = document.getElementById('updatedate').value
+  description = document.getElementById('updatedesc').value
+  issue = document.getElementById('updateissue').value
+  ct_id = document.getElementById('updatectid').value
+
+  su.createSoftwareUpdate(name, date, description, issue, ct_id, {from: account}).then(function() {
+    console.log('Succesfully created the software-update: ' + name);
+  }).catch(function(e) {
+    console.log('There was a problem creating the software-update');
+  });
+  /*
+  function createSoftwareUpdate(string name, uint datePublished, string description, string issue, uint ct_id)
+  */
+}
+
+ function getSoftwareUpdate() {
+   id = document.getElementById('sid').value
+   su.getSoftwareUpdate(id, {from: account}).then(function(value) {
+     console.log(value);
+   }).catch(function(e) {
+     console.log('There was a problem creating the software-update');
+   });
+
+ }
 
 
 window.onload = function() {
