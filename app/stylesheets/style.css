@@ -83,8 +83,9 @@ h1, h2, h3, h4, h5 {
 }
 
 .small-title {
-    margin-bottom: 5px;
-    font-size: 0.9em;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+    font-weight:400;
 }
 
 /* -----------------------------------------------------------------------------
@@ -152,7 +153,10 @@ h1, h2, h3, h4, h5 {
 }
 
 #login-form input {
+    height: auto;
     width: 100%;
+    font-size:1.1em;
+    padding:10px;
 }
 
 #login-form input[type=text], #login-form input[type=password] {
@@ -163,7 +167,16 @@ h1, h2, h3, h4, h5 {
     background-color: rgb(182, 60, 0);
     border: none;
     color: #F9F9F9;
-    font-weight: bold;
+    font-weight: 300;
+}
+
+#login-form input[type=submit]:hover {
+    background:white;
+    color: rgb(182, 60, 0);
+    border: 1px solid rgb(182, 60, 0);
+    cursor:pointer;
+    padding: 9px 10px;
+
 }
 
 /* -----------------------------------------------------------------------------
@@ -172,6 +185,12 @@ h1, h2, h3, h4, h5 {
 
 ----------------------------------------------------------------------------- */
 
+#license-plate-form input {
+    height: auto;
+    width: 100%;
+    font-size:1.1em;
+    padding:10px;
+}
 #license-plate-form input[type=text] {
     width: 85%;
     float: left;
@@ -179,8 +198,23 @@ h1, h2, h3, h4, h5 {
 }
 
 #license-plate-form input[type=submit] {
+    background-color: rgb(182, 60, 0);
+    color:white;
+    border:none;
     width: 15%;
+    font-weight: 100;
+    font-size:1em;
+    padding:11px;
     float: left;
+}
+
+#license-plate-form input[type=submit]:hover {
+    background:white;
+    color: rgb(182, 60, 0);
+    border: 1px solid rgb(182, 60, 0);
+    cursor:pointer;
+    padding: 10px;
+
 }
 
 /* -----------------------------------------------------------------------------
