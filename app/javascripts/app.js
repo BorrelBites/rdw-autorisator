@@ -2,6 +2,9 @@ var accounts;
 var account;
 var cmf = CarManufacturer.deployed();
 var ct = CarType.deployed();
+var lp = Licenceplate.deployed();
+
+var cartypes = [];
 
 
 // function _g(){
@@ -82,7 +85,7 @@ function getCarType(){
     id = parseInt(id)
     manu_id = document.getElementById('manufacturer').value
     manu_id = parseInt(manu_id);
-    
+
     ct.getCarType(id, {from: account}).then(function(value) {
         console.log(value);
     }).catch(function(e) {
@@ -112,6 +115,34 @@ function createCarType(){
 }
 
 
+function getLicenceplateCarType(){
+
+
+    licence = document.getElementById('licencep').value
+
+    lp.getlicenceplateCarType(licence, {from: account}).then(function(value) {
+        console.log(value);
+    }).catch(function(e) {
+        console.log(e);
+        console.log("Error getting manu");
+    });
+}
+
+function createLicenceplate(){
+
+    name = document.getElementById('lp').value
+    car_id = document.getElementById('car_tid').value
+
+    lp.createLicenceplate(name, car_id, {from: account}).then(function() {
+        console.log("Created: "+ name);
+        console.log("Created: "+ car_id);
+    }).catch(function(e) {
+        console.log(e);
+        console.log("Error creating manu");
+    });
+}
+
+
 window.onload = function() {
   web3.eth.getAccounts(function(err, accs) {
     if (err != null) {
@@ -132,6 +163,18 @@ window.onload = function() {
       console.log(parseInt(value.valueOf()));
     })
 
+
+
+    ct.getTotalCarTypes.call(account, {from: account}).then(function(total){
+      for(var i = 0; i < total; i++){
+        ct.getCarType.call(i, {from: account}).then(function(value) {
+          cartypes.push(value);
+        });
+      }
+    });
+
+
+    console.log(cartypes);
     accounts = accs;
     account = accounts[0];
   });
