@@ -1,0 +1,377 @@
+/* -----------------------------------------------------------------------------
+
+    RESET & DEFAULT
+
+----------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+    -mox-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+article, aside, details, figcaption, figure, footer, header, menu, nav, section {
+    display: block;
+}
+
+html, body {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    min-width: 320px;
+    max-width: 640px;
+    overflow-x: hidden;
+    font-family: 'Roboto', 'Myriad Pro', sans-serif;
+    background-color: #F9F9F9;
+    position: relative;
+}
+
+/* -----------------------------------------------------------------------------
+
+    GLOBALS
+
+----------------------------------------------------------------------------- */
+
+.clearfix { clear: both; }
+.center { text-align: center; }
+.inner { position: absolute; }
+.trunc { -ms-text-overflow: ellipsis; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.full { width: 100%;}
+.inline { display: inline-block; }
+.small-left-indent { margin-left: 20px; }
+.small-right-indent { margin-right: 20px; }
+.center-link { margin: 0 auto;}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* -----------------------------------------------------------------------------
+
+    INPUT
+
+----------------------------------------------------------------------------- */
+
+input {
+    height: 28px;
+}
+
+input[type=text], input[type=email], input[type=password] {
+    padding: 0 5px;
+    border: 1px solid #CCCCCC;
+}
+
+/* -----------------------------------------------------------------------------
+
+    TEXT STYLES
+
+----------------------------------------------------------------------------- */
+
+h1, h2, h3, h4, h5 {
+    color: #555;
+}
+
+#divider {
+    text-align: center;
+    line-height: 70px;
+}
+
+.small-title {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+/* -----------------------------------------------------------------------------
+
+    HEADER
+
+----------------------------------------------------------------------------- */
+
+#main-header {
+    width: 100%;
+    height: 60px;
+    background-color: rgb(182, 60, 0);
+}
+
+#site-logo {
+    width: 120px;
+    margin: 10px 0 0 20px;
+}
+
+/* -----------------------------------------------------------------------------
+
+    FOOTER
+
+----------------------------------------------------------------------------- */
+
+#main-footer {
+    height: 40px;
+    width: 100%;
+    background-color: #EEE;
+    border-top: 1px solid #DDD;
+}
+
+/* -----------------------------------------------------------------------------
+
+    SEARCH
+
+----------------------------------------------------------------------------- */
+
+#search-wrapper {
+    width: 100%;
+    height: 30px;
+}
+
+/* -----------------------------------------------------------------------------
+
+    MAIN WRAPPER
+
+----------------------------------------------------------------------------- */
+
+.main-wrapper {
+    position: relative;
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+/* -----------------------------------------------------------------------------
+
+    LOGIN
+
+----------------------------------------------------------------------------- */
+
+#login-wrapper {
+    margin: 100px 20px 0 20px;
+    width: calc(100% - 40px);
+}
+
+#login-form input {
+    width: 100%;
+}
+
+#login-form input[type=text], #login-form input[type=password] {
+    margin-bottom: 3px;
+}
+
+#login-form input[type=submit] {
+    background-color: rgb(182, 60, 0);
+    border: none;
+    color: #F9F9F9;
+    font-weight: bold;
+}
+
+/* -----------------------------------------------------------------------------
+
+    LICENSE-PLATE
+
+----------------------------------------------------------------------------- */
+
+#license-plate-form input[type=text] {
+    width: 85%;
+    float: left;
+    text-align: center;
+}
+
+#license-plate-form input[type=submit] {
+    width: 15%;
+    float: left;
+}
+
+/* -----------------------------------------------------------------------------
+
+    CAR ITEMS
+
+----------------------------------------------------------------------------- */
+
+#overview-wrapper {
+    width: 100%;
+}
+
+.car-item {
+    width: 100%;
+    height: 40px;
+    margin: 0 0 5px;
+    padding: 0 10px;
+    background-color: #ECECEC;
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+}
+
+.car-item-title {
+    line-height: 40px;
+    width: calc(100% - 30px);
+    font-size: 0.9em;
+    font-weight: bold;
+    float: left;
+}
+
+.car-item-btn {
+    width: 24px;
+    height: 24px;
+    margin: 8px 0 8px 6px;
+    float: left;
+}
+
+#add-icon {
+    border-radius: 50%;
+    background-color: rgb(182, 60, 0);
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+    margin-left: 90%;
+}
+
+/* -----------------------------------------------------------------------------
+
+    CAR WRAPPER
+
+----------------------------------------------------------------------------- */
+
+.main-wrapper #car-wrapper {
+    width: 100%;
+    margin: 20px 0px 0 0px;
+}
+
+.main-wrapper h2 {
+    font-weight: 200;
+}
+
+/* -----------------------------------------------------------------------------
+
+    CAR ITEM
+
+----------------------------------------------------------------------------- */
+#info-wrapper .car {
+    margin: 0 20px;
+}
+
+.car {
+    display: block;
+    width: calc(100% - 40px);
+    background-color: #EEE;
+    padding: 21px 0;
+    border-bottom: 1px solid #CCC;
+    height: 70px;
+}
+
+.car a {
+    margin-left: 35px;
+}
+
+#car-wrapper .manufacturer, #car-wrapper .car-detail, #car-wrapper .arrow {
+    display: inline-block;
+}
+
+.manufacturer {
+    width: 34px;
+    margin: -4px 13px 0 13px;
+    float: left;
+}
+
+.car-detail {
+    width: calc(100% - 125px);
+    float: left;
+}
+
+.car-detail-left {
+    float: left;
+    margin-left: 5px;
+}
+
+.car-detail-right {
+    float: right;
+    margin-right: -20px;
+}
+
+#car-wrapper .arrow {
+    width: 24px;
+    margin: 0 3px;
+}
+
+.main-wrapper #car-wrapper .car .update .button {
+    max-width: 200px;
+    margin: 0 auto;
+    border: 0px;
+}
+
+.main-wrapper #car-wrapper .car .button:hover {
+    background-color: rgb(182, 60, 0);;
+    color: #FFF;
+}
+
+/* -----------------------------------------------------------------------------
+
+    ADD NEW CAR
+
+----------------------------------------------------------------------------- */
+
+.main-wrapper #addnewcar {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    background-color: rgb(182, 60, 0);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.main-wrapper #addnewcar p {
+    line-height: 48px;
+    color: #FFF;
+    font-size: 48px;
+}
+
+/* -----------------------------------------------------------------------------
+
+    INFO WRAPPER
+
+----------------------------------------------------------------------------- */
+
+#info-wrapper img {
+    width: 100px;
+}
+#info-wrapper h1 {
+    display: inline-block;
+    font-weight: 300;
+}
+
+#versionbrowser {
+    margin-bottom: 20px;
+}
+
+/* -----------------------------------------------------------------------------
+
+    REVIEW WRAPPER
+
+----------------------------------------------------------------------------- */
+#review-wrapper {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+.review-changes {
+    display: block;
+    margin: 40px 20px 20px 0px;
+    padding: 20px;
+    background-color: #EEE;
+}
+.review-changes li {
+    list-style: none;
+}
+#review-wrapper textarea {
+    width: calc(100% - 20px);
+    height: 100px;
+    margin-bottom: 40px;
+}
+#review-wrapper input {
+    background-color: rgb(182, 60, 0);
+    color: #FFF;
+    width: calc(50% - 20px);
+    height: 40px;
+    border: 0px;
+}
