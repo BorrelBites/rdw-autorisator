@@ -3,4 +3,5 @@ module.exports = function(deployer) {
   // deployer.autolink();
   // deployer.deploy(MetaCoin);
   deployer.deploy(CarManufacturer);
+  deployer.deploy(CarType);
 };

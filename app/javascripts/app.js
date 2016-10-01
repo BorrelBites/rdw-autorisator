@@ -1,6 +1,7 @@
 var accounts;
 var account;
 var cmf = CarManufacturer.deployed();
+var ct = CarType.deployed();
 
 
 // function _g(){
@@ -74,6 +75,42 @@ function createCarManufacturer(){
     });
 }
 
+function getCarType(){
+
+
+    id = document.getElementById('ctid').value
+    id = parseInt(id)
+    manu_id = document.getElementById('manufacturer').value
+    manu_id = parseInt(manu_id);
+    
+    ct.getCarType(id, {from: account}).then(function(value) {
+        console.log(value);
+    }).catch(function(e) {
+        console.log(e);
+        console.log("Error getting manu");
+    });
+    ct.getCarTypeManufacturer(manu_id, {from: account}).then(function(value) {
+        console.log(value);
+    }).catch(function(e) {
+        console.log(e);
+        console.log("Error getting manu");
+    });
+}
+
+function createCarType(){
+
+    name = document.getElementById('ctcreate').value
+    manu_id = document.getElementById('manu_id').value
+
+    ct.createCarType(name, manu_id, {from: account}).then(function() {
+        console.log("Created: "+ name);
+        console.log("Created: "+ manu_id);
+    }).catch(function(e) {
+        console.log(e);
+        console.log("Error creating manu");
+    });
+}
+
 
 window.onload = function() {
   web3.eth.getAccounts(function(err, accs) {
@@ -88,7 +125,11 @@ window.onload = function() {
     }
 
     cmf.getTotalCarManufacturers.call(account, {from: account}).then(function(value){
-        console.log(parseInt(value.valueOf()) -1 );
+        console.log(parseInt(value.valueOf()));
+    })
+
+    ct.getTotalCarTypes.call(account, {from: account}).then(function(value){
+      console.log(parseInt(value.valueOf()));
     })
 
     accounts = accs;
