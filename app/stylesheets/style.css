@@ -163,14 +163,16 @@ h1, h2, h3, h4, h5 {
     margin-bottom: 3px;
 }
 
-#login-form input[type=submit] {
+#login-form button {
     background-color: rgb(182, 60, 0);
+    width: 100%;
     border: none;
     color: #F9F9F9;
     font-weight: 300;
+    padding:10px;
 }
 
-#login-form input[type=submit]:hover {
+#login-form button:hover {
     background:white;
     color: rgb(182, 60, 0);
     border: 1px solid rgb(182, 60, 0);

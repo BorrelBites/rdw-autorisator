@@ -8,7 +8,7 @@
         <meta name="author" content="BorrelBites">
         <meta name="description" content="RDW">
         <link rel="stylesheet" href="css/style.css" media="screen, handheld, projection">
-        <script type="text/javascript" src="/public/js/core.js"></script>
+        <script src="./app.js"></script>
 
     </head>
 
@@ -20,11 +20,11 @@
         <div class="main-wrapper">
             <div id="login-wrapper" class="inner">
                 <h5 class="small-title center">Log in met uw RDW account</h5>
-                <form id="login-form">
-                    <input type="text" name="username" placeholder="Gebruikersnaam">
-                    <input type="password" name="password" placeholder="Wachtwoord">
-                    <input type="submit" name="Inloggen" value="Inloggen">
-                </form>
+                <div id="login-form">
+                    <input type="text" name="username" placeholder="Gebruikersnaam" id="username">
+                    <input type="password" name="password" placeholder="Wachtwoord" id="password">
+                    <button onclick="login()">inloggen</button>
+                </div>
 
                 <h3 id="divider">of</h3>
 

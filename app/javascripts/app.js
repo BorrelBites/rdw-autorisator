@@ -1,3 +1,9 @@
+// global vars
+var user = {};
+if (localStorage.user){
+  user = JSON.parse(localStorage.user);
+}
+
 //middleware javascrip to read and write to blockchain
 
 //enitiy: CarManufacturer
@@ -53,11 +59,14 @@ var xmlhttp = new XMLHttpRequest();
 var url = "http://192.168.1.99:9941/login"
 
 function login() {
+
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
         xmlhttp.open("POST", url);
         xmlhttp.setRequestHeader("Content-Type", "application/json");
         xmlhttp.send(JSON.stringify({
-            "email": "matti@borrel.bites",
-            "password": "vegqghqegfje"
+            "email": username,
+            "password": password
 
         }));
         xmlhttp.onreadystatechange = function(){
@@ -65,8 +74,8 @@ function login() {
             var response = JSON.parse(xmlhttp.responseText);
             console.log(response);
             if (response.success){
-
-
+              user = response;
+              localStorage.user = JSON.stringify(user)
             };
 
         }
