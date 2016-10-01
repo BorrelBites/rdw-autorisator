@@ -162,7 +162,7 @@ function createSoftwareUpdate() {
 
  function getSoftwareUpdate() {
    id = document.getElementById('sid').value
-   su.getSoftwareUpdate(id, {from: account}).then(function(value) {
+   su.getSoftwareUpdate.call(id, {from: account}).then(function(value) {
      console.log(value);
    }).catch(function(e) {
      console.log('There was a problem creating the software-update');
@@ -170,6 +170,30 @@ function createSoftwareUpdate() {
 
  }
 
+ function setReview(){
+   id = document.getElementById('swid').value
+   desc = document.getElementById('swdesc').value
+   accepted = (document.getElementById('accepted').value == 'true')
+
+
+   su.addReviewToSoftwareUpdate(id, desc, accepted, {from: account}).then(function() {
+     console.log('added review with id: ' + id);
+   }).catch(function(e) {
+     console.log(e);
+     console.log('There was a problem creating the software-update');
+   });
+ }
+
+ function getReview() {
+   sid = document.getElementById('revsid').value
+   rid = document.getElementById('revid').value
+   su.getReview(sid, rid, {from: account}).then(function(value) {
+     console.log(value);
+   }).catch(function(e) {
+     console.log('There was a problem creating the software-update');
+   });
+
+ }
 
 window.onload = function() {
   web3.eth.getAccounts(function(err, accs) {

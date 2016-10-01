@@ -1,7 +1,7 @@
 contract SoftwareUpdate {
 
   struct softwareUpdate{ string name; uint ct_id; uint minAmountReviewed; bool isPublished; uint datePublished; bool isAccepted; bool isPending; uint successPercentage;
-                        review[] reviews; uint reviewCount; string description; string issue; }
+                        mapping (uint => review) reviews; uint reviewCount; string description; string issue; }
 
   struct review{string revDescription; bool accepted; }
 
@@ -34,8 +34,20 @@ contract SoftwareUpdate {
     return (softwareupdates[id].ct_id);
   }
 
-  function getSoftwareUpdate(uint id) constant returns(string name, uint ct_id, bool isAccepted, bool isPending ){
-    return (softwareupdates[id].name, softwareupdates[id].ct_id, softwareupdates[id].isAccepted, softwareupdates[id].isPending);
+  function getSoftwareUpdate(uint id) constant returns(string name, uint ct_id, bool isAccepted, bool isPending, string description, string issue ){
+    return (softwareupdates[id].name, softwareupdates[id].ct_id, softwareupdates[id].isAccepted, softwareupdates[id].isPending, softwareupdates[id].description, softwareupdates[id].issue);
+  }
+
+  function getSoftwareUpdateDatePublished(uint id) constant returns (uint datePublished) {
+    return (softwareupdates[id].datePublished);
+  }
+
+  function getReviewCount(uint id) constant returns(uint reviewCount){
+    return softwareupdates[id].reviewCount;
+  }
+
+  function getReview(uint id, uint revId) constant returns(string revDescription, bool accepted){
+    return (softwareupdates[id].reviews[revId].revDescription,softwareupdates[id].reviews[revId].accepted);
   }
 
   function addReviewToSoftwareUpdate(uint id, string description, bool accepted) {
