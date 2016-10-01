@@ -1,49 +1,65 @@
 <!DOCTYPE HTML>
 
-
 <html lang='nl'>
-<head>
+    <head>
+        <title>RDW</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="BorrelBites">
+        <meta name="description" content="RDW">
+        <link rel="stylesheet" href="stylesheets/style.css" media="screen, handheld, projection">
+        <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" type="text/css" rel="stylesheet">
 
-    <title>RDW</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="BorrelBites">
-    <meta name="description" content="RDW">
-    <link rel="stylesheet" href="css/style.css" media="screen, handheld, projection">
-    <link rel="stylesheet" href="css/style-ibo.css" media="screen, handheld, projection">
-    <script type="text/javascript" src="/public/js/core.js"></script>
-    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" type="text/css" rel="stylesheet">
+    </head>
 
-</head>
+    <body>
+        <div id="menu">
+            <div id="menu-header">
+            </div>
 
-<body>
-<header id="main-header">
-    <img src="img/rdw_logo.png" id="site-logo">
-</header>
+            <ul id="menu-nav">
+                <li>Updates overzicht</li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
 
-<div class="main-wrapper">
-    <a href="#"><i class="ion-android-arrow-back" style="font-size:30px; margin-left: 10px;"></i></a>
-    <h2 class="center" style="margin-top: -35px;">Review software update:</h2>
-    <div id="review-wrapper">
-        <img src="img/tesla.png" style="width: 34px; float: left;">
-        <p>Tesla model S (Versie 8.0.2)</p>
-        <ul class="review-changes">
-            <li style="margin-bottom: 20px;">Updates:</li>
-            <li>- 4-wielaandrijving</li>
-            <li>- Software optimalisaties</li>
-            <li>- Auto-pilot focus op radar in plaats van camera</li>
-        </ul>
-        <p style="margin-bottom: 10px;">Voeg comeentaar toe:</p>
-        <form method="POST" action="#">
-            <textarea></textarea>
-            <input type="submit" name="submit" value="Afkeuren" style="margin-right: 10px;">
-            <input type="submit" name="submit" value="Goedkeuren" style="margin-left: 10px;">
-        </form>
-    </div>
-</div>
+        <header id="main-header">
+            <img src="images/rdw_logo.png" id="site-logo">
+            <div id="menu-toggle">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </header>
 
-<footer id="main-footer">
+        <div class="main-wrapper">
+            <a href="#"><i class="ion-android-arrow-back" style="font-size:30px; margin-left: 10px;"></i></a>
+            <h2 class="center" style="margin-top: -35px;">Review software update:</h2>
+            <div id="review-wrapper">
+                <img src="images/tesla.png" style="width: 34px; float: left;">
+                <p>Tesla model S (Versie 8.0.2)</p>
+                <ul class="review-changes">
+                    <li style="margin-bottom: 20px;">Updates:</li>
+                    <li>- 4-wielaandrijving</li>
+                    <li>- Software optimalisaties</li>
+                    <li>- Auto-pilot focus op radar in plaats van camera</li>
+                </ul>
+                <p style="margin-bottom: 10px;">Voeg comeentaar toe:</p>
+                <form method="POST" action="#">
+                    <textarea></textarea>
+                    <input type="submit" name="submit" value="Afkeuren" style="margin-right: 10px;">
+                    <input type="submit" name="submit" value="Goedkeuren" style="margin-left: 10px;">
+                </form>
+            </div>
+        </div>
 
-</footer>
-</body>
+        <footer id="main-footer">
+
+        </footer>
+
+        <script type="text/javascript" src="javascripts/script.js"></script>
+    </body>
 </html>
