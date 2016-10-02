@@ -423,6 +423,12 @@ h1, h2, h3, h4, h5 {
     margin-bottom: 20px;
 }
 
+#versionbrowser a {
+   float: right;
+   margin-top: -50px;
+   margin-right: 70px;
+}
+
 /* -----------------------------------------------------------------------------
 
     REVIEW WRAPPER

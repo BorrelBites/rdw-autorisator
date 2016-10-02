@@ -139,7 +139,7 @@ function buildCarTypeUpdatesList(){
               var over = document.getElementById("versionbrowser");
               if (versionbrowser){
                 var idx = value[6].toNumber()
-                over.innerHTML = over.innerHTML + '<div class="car"><div class="car-detail"> <p class="car-detail-right">'+value[0]+'</p></div> </div> <a href="/carUpdate.html?updateid='+idx+'" style="float: left;"><i class="ion-chevron-right"></i></a> </div>'
+                over.innerHTML = over.innerHTML + '<div class="car"><div class="car-detail"> <p class="car-detail-right">'+value[0]+'</p></div> </div> <a href="/carUpdate.html?updateid='+idx+'"><i class="ion-chevron-right"></i></a> </div>'
               }
             });
         });
