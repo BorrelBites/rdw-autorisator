@@ -78,6 +78,7 @@ function buildLicensePlate(){
   var lpate = getParameterByName('lp');
   document.getElementById('lpn').innerHTML = lpate;
   lp.getlicenceplateCarType(lpate, {from: account}).then(function(value) {
+    buildCarTypeSoftwareList(value);
     templateCarType(value);
   }).catch(function(e) {
       console.log(e);
@@ -115,6 +116,23 @@ function buildCarTypeListByMid(){
       });
     }
   });
+}
+
+function buildCarTypeSoftwareList(cid){
+      su.getSoftwareUpdateCount.call(account, {from: account}).then(function(total){
+        for(var i = 0; i < total; i++){
+            su.getSoftwareUpdate.call(i, {from: account}).then(function(value) {
+
+               if(parseInt(value[1]) != parseInt(cid)){return;}
+
+
+              var over = document.getElementById("versionbrowser");
+              if (versionbrowser){
+                over.innerHTML = over.innerHTML + '<div class="car"><div class="car-detail"> <p class="car-detail-right">'+value[0]+'</p></div> </div>'
+              }
+          });
+        }
+      });
 }
 
 function buildPendingList(){
