@@ -36,11 +36,13 @@
         </header>
 
         <div class="main-wrapper">
+            <a href="#" onclick="history.go(-1);"><i class="ion-android-arrow-back" style="font-size:30px; margin-left: 10px;"></i></a>
             <div id="cartypeCreate" class="inner">
                 <h5 class="small-title center">Maak een nieuwe software update aan</h5>
-                <div id="createCarType-form">
+                <div id="form">
                     <input type="text" name="" placeholder="Update Name" id="updateName">
-                    <input type="text" name="" placeholder="Update Date" id="updateDate">
+                    <input type="text" name="" placeholder="Update Date" id="updateDate" disabled="disabled">
+                    <script>document.getElementById('updateDate').value = Date.now();</script>
                     <input type="text" name="" placeholder="description" id="updateDescription">
                     <input type="text" name="" placeholder="issue" id="updateIssue">
                     <button onclick="createSoftwareUpdate()">Create</button>

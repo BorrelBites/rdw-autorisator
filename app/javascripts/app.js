@@ -2,6 +2,10 @@
 var user = {};
 if (localStorage.user){
   user = JSON.parse(localStorage.user);
+} else {
+  if (window.location.pathname != '/login.html'){
+    window.location.pathname = '/login.html';
+  }
 }
 
 var accounts;
@@ -22,25 +26,30 @@ window.onload = function() {
       return;
     }
 
+    // initD(); // run on first build
+
     accounts = accs;
     account = accounts[0];
 
-    createLicenceplate('000000', 5);
-    createLicenceplate('ab3e2a', 6);
-    //
-    // createCarManufacturer('BMW');
-    // createCarManufacturer('Audi');
-    // createCarManufacturer('Volvo');
-    // createCarManufacturer('Tesla');
-    // createCarManufacturer('Mattimobiel');
     if (window.location.pathname == '/facturer_overview.html'){buildCarTypeListByMid();}
     if (window.location.pathname == '/carType.html'){buildCarTypeUpdatesList(); templateCarType(getParameterByName('ct_id'))}
-    if (window.location.pathname == '/carUpdate.html'){buildCarUpdate();}
+    if (window.location.pathname == '/carUpdate.html'){buildCarUpdate(); buildReviewList(getParameterByName('updateid'))}
     if (window.location.pathname == '/details.html'){buildLicensePlate();}
     if (window.location.pathname == '/rdw.html'){buildPendingList();}
     if (window.location.pathname == '/review.html'){buildCarUpdate();}
 
   });
+}
+
+function initD(){
+  createLicenceplate('000000', 5);
+  createLicenceplate('ab3e2a', 6);
+
+  createCarManufacturer('BMW');
+  createCarManufacturer('Audi');
+  createCarManufacturer('Volvo');
+  createCarManufacturer('Tesla');
+  createCarManufacturer('Mattimobiel');
 }
 
 function redirToCreateUpdate(){
@@ -60,11 +69,37 @@ function buildCarUpdate(){
     if (software_description != null) {software_description.innerHTML = value[4]}
 
     var software_status = document.getElementById('software_status');
-    if (software_status != null) {software_status.innerHTML = value[2]}
+    if (software_status != null) {software_status.innerHTML = createStatusMessage(value[3],value[2])}
 
     templateCarType(value[1]);
   });
 
+}
+function ynicon(par){
+  if (par){ return '<i class="ion-android-done"></i>';}
+  return '<i class="ion-android-close"></i>';
+}
+
+function buildReviewList(id){
+  su.getReviewCount(id, account, {from: account}).then(function(total){
+    for(var i = 0; i < total; i++){
+      su.getReview(id, i, {from: account}).then(function(value) {
+
+        changeList = document.getElementById('changeList');
+        changeList.innerHTML = changeList.innerHTML + '<li>'+ynicon(value[1])+' '+value[0]+'</li>'
+
+
+      }).catch(function(e) {
+        console.log('There was a problem creating the software-update');
+      });
+    }
+  });
+}
+
+function createStatusMessage(isPending, isApproved){
+  if (isPending){return '<i class="ion-android-send"></i> Pending'}
+  if (isApproved){return '<i class="ion-android-done"></i> Goedgekeurd'}
+  return '<i class="ion-android-close"></i> Afgekeurd'
 }
 
 function templateCarType(id){
@@ -94,9 +129,19 @@ function buildCarTypeUpdatesList(){
       var ctcount = 0;
       for(var i = 0; i < total; i++){
           su.getSoftwareUpdate.call(i, {from: account}).then(function(value) {
-            var over = document.getElementById("versionbrowser");
-            over.innerHTML = over.innerHTML + '<div class="car"><div class="car-detail"> <p class="car-detail-right">'+value[0]+'</p></div> <a href="/carUpdate.html?updateid='+ctcount+'" style="float: left;"><i class="ion-chevron-right"></i></a> </div>'
-            ctcount++;
+
+            if(parseInt(value[1]) != parseInt(id)){return;}
+
+            ct.getCarType.call(value[1], {from: account}).then(function(carType) {
+
+              if(parseInt(carType[2]) != parseInt(user.mid)){return;}
+
+              var over = document.getElementById("versionbrowser");
+              if (versionbrowser){
+                var idx = value[6].toNumber()
+                over.innerHTML = over.innerHTML + '<div class="car"><div class="car-detail"> <p class="car-detail-right">'+value[0]+'</p></div> </div> <a href="/carUpdate.html?updateid='+idx+'" style="float: left;"><i class="ion-chevron-right"></i></a> </div>'
+              }
+            });
         });
       }
     });
@@ -123,8 +168,7 @@ function buildCarTypeSoftwareList(cid){
         for(var i = 0; i < total; i++){
             su.getSoftwareUpdate.call(i, {from: account}).then(function(value) {
 
-               if(parseInt(value[1]) != parseInt(cid)){return;}
-
+              if(parseInt(value[1]) != parseInt(cid)){return;}
 
               var over = document.getElementById("versionbrowser");
               if (versionbrowser){
@@ -152,7 +196,7 @@ function buildPendingList(){
 
 function sendReview(response) {
 
-  var desc = document.getElementById('comment');
+  var desc = document.getElementById('comment').value;
   var id   = getParameterByName('updateid');
 
   su.addReviewToSoftwareUpdate(id, desc, response, {from: account}).then(function() {

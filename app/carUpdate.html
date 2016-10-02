@@ -36,7 +36,7 @@
         </header>
 
         <div class="main-wrapper">
-            <a href="#"><i class="ion-android-arrow-back" style="font-size:30px; margin-left: 10px;"></i></a>
+            <a href="#" onclick="history.go(-1);"><i class="ion-android-arrow-back" style="font-size:30px; margin-left: 10px;"></i></a>
             <h2 class="center" style="padding-top: 20px;">Gekozen auto:</h2>
             <h1 class="center"><span id="cartype_name"></span></h1>
             <div id="info-wrapper">
@@ -46,8 +46,10 @@
                     <span id="software_description"></span>
                 </ul>
                 <ul class="review-changes">
-                    <li style="margin-bottom: 20px;">Status: <span id="software_status"></span></li>
-                    <li>- Auto-pilot wijziging dient verder onderzocht te worden.</li>
+                  <li>Status: <span id="software_status"></span></li>
+                </ul>
+                <ul class="review-changes" id="changeList">
+
                 </ul>
             </div>
         </div>

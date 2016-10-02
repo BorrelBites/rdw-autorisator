@@ -171,23 +171,23 @@ h1, h2, h3, h4, h5 {
 
 ----------------------------------------------------------------------------- */
 
-#login-wrapper {
+#form-wrapper {
     margin: 100px 20px 0 20px;
     width: calc(100% - 40px);
 }
 
-#login-form input {
+#form input {
     height: auto;
     width: 100%;
     font-size:1.1em;
     padding:10px;
 }
 
-#login-form input[type=text], #login-form input[type=password] {
+#form input[type=text], #form input[type=password] {
     margin-bottom: 8px;
 }
 
-#login-form button {
+#form button {
     background-color: rgb(182, 60, 0);
     width: 100%;
     border: none;
@@ -196,7 +196,7 @@ h1, h2, h3, h4, h5 {
     padding:10px;
 }
 
-#login-form button:hover {
+#form button:hover {
     background:white;
     color: rgb(182, 60, 0);
     border: 1px solid rgb(182, 60, 0);
@@ -361,7 +361,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .main-wrapper #car-wrapper .car .button:hover {
-    background-color: rgb(182, 60, 0);;
+    background-color: rgb(182, 60, 0);
     color: #FFF;
 }
 
@@ -385,6 +385,24 @@ h1, h2, h3, h4, h5 {
     line-height: 48px;
     color: #FFF;
     font-size: 48px;
+}
+
+#createCarType-form input {
+  width: calc(100% - 40px);
+  margin: 0 20px 5px 20px;
+  height: 30px;
+
+}
+
+#createCarType-form button {
+  width: 63px;
+  margin-top: 10px;
+  margin-left: calc(50% - 32px);
+  margin-right: calc(50% - 32px);
+  padding: 5px 10px;
+  background-color: rgb(182, 60, 0);
+  color: #FFF;
+  border: 0;
 }
 
 /* -----------------------------------------------------------------------------
