@@ -1,20 +1,20 @@
 contract CarManufacturer {
 
-  struct manufacturer{ uint id; string name; }
+  struct manufacturer{ int id; string name; }
 
-  uint items;
+  int items;
 
-  mapping (uint => manufacturer) manufacturers;
+  mapping (int => manufacturer) manufacturers;
 
   function CarManufacturer() {
-      uint items = 0;
+      int items = 0;
   }
 
-  function getCarManufacturer(uint item_id) constant returns (string name) {
+  function getCarManufacturer(int item_id) constant returns (string name) {
       return (manufacturers[item_id].name);
   }
 
-  function getTotalCarManufacturers() returns (uint) {
+  function getTotalCarManufacturers() returns (int) {
       return items;
   }
 

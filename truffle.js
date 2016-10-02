@@ -8,13 +8,21 @@ module.exports = {
     "review.html": "review.html",
     "details.html": "details.html",
     "consumer.html": "consumer.html",
+    "createCarType.html": "createCarType.html",
+    "carType.html":"carType.html",
+    "createUpdate.html": "createUpdate.html",
+    "carUpdate.html": "carUpdate.html",
+    "details.html": "details.html",
     "app.js": [
       "javascripts/app.js"
     ],
-    "css/style.css": [
+    "javascripts/script.js": [
+      "javascripts/script.js"
+    ],
+    "stylesheets/style.css": [
       "stylesheets/style.css"
     ],
-    "img/": "images/"
+    "images/": "images/"
   },
   rpc: {
     host: "localhost",

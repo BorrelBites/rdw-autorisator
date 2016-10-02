@@ -1,20 +1,20 @@
 contract SoftwareUpdate {
 
-  struct softwareUpdate{ string name; uint ct_id; uint minAmountReviewed; bool isPublished; uint datePublished; bool isAccepted; bool isPending; uint successPercentage;
-                        mapping (uint => review) reviews; uint reviewCount; string description; string issue; }
+  struct softwareUpdate{ string name; int ct_id; int minAmountReviewed; bool isPublished; int datePublished; bool isAccepted; bool isPending; int successPercentage;
+                        mapping (int => review) reviews; int reviewCount; string description; string issue; }
 
   struct review{string revDescription; bool accepted; }
 
-  mapping (uint => softwareUpdate) softwareupdates;
+  mapping (int => softwareUpdate) softwareupdates;
 
-  uint item;
+  int item;
 
   function SoftwareUpdate() {
     item = 0;
   }
 
 
-  function createSoftwareUpdate(string name, uint datePublished, string description, string issue, uint ct_id){
+  function createSoftwareUpdate(string name, int datePublished, string description, string issue, int ct_id){
     softwareupdates[item].name = name;
     softwareupdates[item].datePublished = datePublished;
     softwareupdates[item].description = description;
@@ -26,31 +26,35 @@ contract SoftwareUpdate {
     item++;
   }
 
-  function getSoftwareUpdateStatus(uint id) constant returns (bool isAccepted) {
+  function getSoftwareUpdateStatus(int id) constant returns (bool isAccepted) {
     return (softwareupdates[id].isAccepted);
   }
 
-  function getSoftwareUpdateCarType(uint id) constant returns (uint ct_id) {
+  function getSoftwareUpdateCarType(int id) constant returns (int ct_id) {
     return (softwareupdates[id].ct_id);
   }
 
-  function getSoftwareUpdate(uint id) constant returns(string name, uint ct_id, bool isAccepted, bool isPending, string description, string issue ){
-    return (softwareupdates[id].name, softwareupdates[id].ct_id, softwareupdates[id].isAccepted, softwareupdates[id].isPending, softwareupdates[id].description, softwareupdates[id].issue);
+  function getSoftwareUpdate(int id) constant returns(string name, int ct_id, bool isAccepted, bool isPending, string description, string issue, int upid ){
+    return (softwareupdates[id].name, softwareupdates[id].ct_id, softwareupdates[id].isAccepted, softwareupdates[id].isPending, softwareupdates[id].description, softwareupdates[id].issue, id);
   }
 
-  function getSoftwareUpdateDatePublished(uint id) constant returns (uint datePublished) {
+  function getSoftwareUpdateDatePublished(int id) constant returns (int datePublished) {
     return (softwareupdates[id].datePublished);
   }
 
-  function getReviewCount(uint id) constant returns(uint reviewCount){
+  function getReviewCount(int id) constant returns(int reviewCount){
     return softwareupdates[id].reviewCount;
   }
 
-  function getReview(uint id, uint revId) constant returns(string revDescription, bool accepted){
+  function getReview(int id, int revId) constant returns(string revDescription, bool accepted){
     return (softwareupdates[id].reviews[revId].revDescription,softwareupdates[id].reviews[revId].accepted);
   }
 
-  function addReviewToSoftwareUpdate(uint id, string description, bool accepted) {
+  function getSoftwareUpdateCount() constant returns(int count){
+    return item;
+  }
+
+  function addReviewToSoftwareUpdate(int id, string description, bool accepted) {
     softwareupdates[id].reviews[softwareupdates[id].reviewCount].revDescription = description;
     softwareupdates[id].reviews[softwareupdates[id].reviewCount].accepted = accepted;
     softwareupdates[id].reviewCount++;
@@ -58,8 +62,8 @@ contract SoftwareUpdate {
     if (softwareupdates[id].reviewCount >= softwareupdates[id].minAmountReviewed) {
       softwareupdates[id].isPending = false;
 
-      uint amountAproved = 0;
-      for (uint i = 0; i < softwareupdates[id].reviewCount; i++) {
+      int amountAproved = 0;
+      for (int i = 0; i < softwareupdates[id].reviewCount; i++) {
         if (softwareupdates[id].reviews[i].accepted == true) {
           amountAproved++;
         }

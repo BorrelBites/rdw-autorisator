@@ -7,16 +7,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="BorrelBites">
         <meta name="description" content="RDW">
-        <link rel="stylesheet" href="css/style.css" media="screen, handheld, projection">
-        <link rel="stylesheet" href="css/style-ibo.css" media="screen, handheld, projection">
-        <script type="text/javascript" src="/public/js/core.js"></script>
+        <link rel="stylesheet" href="stylesheets/style.css" media="screen, handheld, projection">
 
     </head>
 
     <body>
-    <header id="main-header">
-        <img src="img/rdw_logo.png" id="site-logo">
-    </header>
+        <div id="menu">
+            <div id="menu-header">
+            </div>
+
+            <ul id="menu-nav">
+                <li>Updates overzicht</li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
+        <header id="main-header">
+            <img src="images/rdw_logo.png" id="site-logo">
+            <div id="menu-toggle">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </header>
 
         <div class="main-wrapper">
             <div id="search-wrapper">
@@ -24,58 +40,10 @@
             </div>
 
             <div id="overview-wrapper" class="inner">
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
-                <div class="car-item">
-                    <p class="car-item-title trunc">Volkswagen Polo</p>
-                    <a><img src="img/arrow.png" class="car-item-btn"></a>
-                </div>
 
             </div>
             <div id="addnewcar">
-                <a href="#">
+                <a href="#" onclick="window.location.href = '/createCarType.html'">
                     <p class="center">+</p>
                 </a>
             </div>
@@ -84,5 +52,8 @@
         <footer id="main-footer">
 
         </footer>
+
+        <script type="text/javascript" src="javascripts/script.js"></script>
+        <script src="./app.js"></script>
     </body>
 </html>

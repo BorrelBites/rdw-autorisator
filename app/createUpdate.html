@@ -36,20 +36,14 @@
         </header>
 
         <div class="main-wrapper">
-            <div id="login-wrapper" class="inner">
-                <h5 class="small-title center">Log in met uw RDW account</h5>
-                <div id="login-form">
-                    <input type="text" name="username" placeholder="Gebruikersnaam" id="username">
-                    <input type="password" name="password" placeholder="Wachtwoord" id="password">
-                    <button onclick="login()">inloggen</button>
-                </div>
-
-                <h3 id="divider">of</h3>
-
-                <h5 class="small-title center">Voer een kentekenplaat in</h5>
-                <div id="license-plate-form">
-                    <input type="text" id="licenseplate" value="04DW4G">
-                    <input type="submit" value="opzoeken" onclick="searchLicensePlate();">
+            <div id="cartypeCreate" class="inner">
+                <h5 class="small-title center">Maak een nieuwe software update aan</h5>
+                <div id="createCarType-form">
+                    <input type="text" name="" placeholder="Update Name" id="updateName">
+                    <input type="text" name="" placeholder="Update Date" id="updateDate">
+                    <input type="text" name="" placeholder="description" id="updateDescription">
+                    <input type="text" name="" placeholder="issue" id="updateIssue">
+                    <button onclick="createSoftwareUpdate()">Create</button>
                 </div>
             </div>
         </div>
