@@ -10,12 +10,8 @@ contract CarType {
       int items = 0;
   }
 
-  function getCarType(int item_id) constant returns (string name) {
-      return (cartypes[item_id].name);
-  }
-
-  function getCarTypeManufacturer(int item_id) constant returns (int manu_id) {
-      return (cartypes[item_id].manu_id);
+  function getCarType(int item_id) constant returns (string name, int id, int manu_id) {
+      return (cartypes[item_id].name, item_id, cartypes[item_id].manu_id);
   }
 
   function getTotalCarTypes() returns (int) {

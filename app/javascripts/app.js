@@ -22,7 +22,6 @@ window.onload = function() {
       return;
     }
 
-
     accounts = accs;
     account = accounts[0];
 
@@ -35,53 +34,13 @@ window.onload = function() {
     // createCarManufacturer('Tesla');
     // createCarManufacturer('Mattimobiel');
     if (window.location.pathname == '/facturer_overview.html'){buildCarTypeListByMid();}
-    if (window.location.pathname == '/carType.html'){buildCarTypeUpdatesList();}
+    if (window.location.pathname == '/carType.html'){buildCarTypeUpdatesList(); templateCarType(getParameterByName('ct_id'))}
     if (window.location.pathname == '/carUpdate.html'){buildCarUpdate();}
     if (window.location.pathname == '/details.html'){buildLicensePlate();}
     if (window.location.pathname == '/rdw.html'){buildPendingList();}
     if (window.location.pathname == '/review.html'){buildCarUpdate();}
 
   });
-}
-
-
-//middleware javascrip to read and write to blockchain
-
-//enitiy: CarManufacturer
-  //read functions start
-function getCarManufacturer(id){
-      var cmf = CarManufacturer.deployed();
-      cmf.getCarManufacturer(id, {from: account}).then(function(value) {
-        //logic
-
-      }).catch(function(e) {
-          console.log(e);
-          console.log("Error getting manu");
-      });
-}
-  //read functions end
-
-  //write functions Start
-function createCarManufacturer(name){
-      cmf.createCarManufacturer(name, {from: account}).then(function() {
-      //logic
-
-      }).catch(function(e) {
-          console.log(e);
-          console.log("Error creating manu");
-      });
-}
-  //write functions end
-//entity: CarManufacturer end
-//enitiy: CarType
-    //read functions start
-function getCarType(id, manu_id, callback){
-      ct.getCarType(id, {from: account}).then(function(value) {
-        callback(value);
-      }).catch(function(e) {
-          console.log(e);
-          console.log("Error getting manu");
-      });
 }
 
 function redirToCreateUpdate(){
@@ -94,34 +53,36 @@ function searchLicensePlate(){
 function buildCarUpdate(){
 
   su.getSoftwareUpdate.call(parseInt(getParameterByName('updateid')), {from: account}).then(function(value) {
-    document.getElementById('software_version').innerHTML = value[0]
-    document.getElementById('software_description').innerHTML = value[4]
-    document.getElementById('software_status').innerHTML = value[2]
+    var software_version = document.getElementById('software_version');
+    if (software_version != null) {software_version.innerHTML = value[0]}
+
+    var software_description = document.getElementById('software_description');
+    if (software_description != null) {software_description.innerHTML = value[4]}
+
+    var software_status = document.getElementById('software_status');
+    if (software_status != null) {software_status.innerHTML = value[2]}
+
+    templateCarType(value[1]);
   });
 
 }
 
+function templateCarType(id){
+  ct.getCarType(parseInt(id), {from: account}).then(function(value) {
+    var cartype_name = document.getElementById('cartype_name');
+    if (cartype_name) {cartype_name.innerHTML = value[0]}
+  }).catch(function(e) {});
+}
 
 function buildLicensePlate(){
-
   var lpate = getParameterByName('lp');
   document.getElementById('lpn').innerHTML = lpate;
   lp.getlicenceplateCarType(lpate, {from: account}).then(function(value) {
-
-    ct.getCarType(value, {from: account}).then(function(typeName) {
-        document.getElementById('cartype_name').innerHTML = typeName
-    }).catch(function(e) {
-        console.log(e);
-        console.log("Error getting manu");
-    });
-
-
-
+    templateCarType(value);
   }).catch(function(e) {
       console.log(e);
       console.log("Error getting manu");
   });
-
 }
 
 function buildCarTypeUpdatesList(){
@@ -142,30 +103,23 @@ function buildCarTypeUpdatesList(){
 }
 
 function buildCarTypeListByMid(){
+
   ct.getTotalCarTypes.call(account, {from: account}).then(function(total){
-    var ctcount = 0;
     for(var i = 0; i < total; i++){
       ct.getCarType.call(i, {from: account}).then(function(value) {
-        // ct.getCarTypeManufacturer.call(i, {from: account}).then(function(man) {
-        //
-        //   var manid = parseInt(man.valueOf())
-        //   alert('man:' + manid.toString());
-        //   if (manid == user.mid){
-            var over = document.getElementById("overview-wrapper");
-            over.innerHTML = over.innerHTML + '<div class="car-item"><p class="car-item-title trunc">'+value+'</p><a href="/carType.html?ct_id='+ctcount+'"><img src="images/arrow.png" class="car-item-btn"></a></div>';
-            ctcount++;
-        //   }
-        // });
+
+        if (value[2] != user.mid){ return; }
+        var over = document.getElementById("overview-wrapper");
+        over.innerHTML = over.innerHTML + '<div class="car-item"><p class="car-item-title trunc">'+value[0]+'</p><a href="/carType.html?ct_id='+value[1]+'"><img src="images/arrow.png" class="car-item-btn"></a></div>';
+
       });
     }
   });
-
 }
 
 function buildPendingList(){
 
       su.getSoftwareUpdateCount.call(account, {from: account}).then(function(total){
-        alert(total)
         for(var i = 0; i < total; i++){
             su.getSoftwareUpdate.call(i, {from: account}).then(function(value) {
               if(!value[3]){return;}
@@ -193,8 +147,6 @@ function sendReview(response) {
 
 }
 
-
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -205,35 +157,18 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-
-function getCarTypeManufacturer(manu_id){
-  ct.getCarTypeManufacturer(manu_id, {from: account}).then(function(value) {
-      //logic
-
-  }).catch(function(e) {
-      console.log(e);
-      console.log("Error getting manu");
-  });
-}
-    //read functions end
-
-    //write functions Start
 function createCarType(name){
   var name = document.getElementById('carTypeName').value;
   var mid = user.mid;
 
-  ct.createCarType(name, mid, {from: account}).then(function() {
+  ct.createCarType(name, parseInt(mid), {from: account}).then(function() {
       window.location.href = '/facturer_overview.html'
   }).catch(function(e) {
       console.log(e);
       console.log("Error creating manu");
   });
 }
-    //write functions end
 
-//entity: CarType end
-//enitiy: Licenceplate
-      //read functions start
 function getLicenceplateCarType(licence){
     lp.getlicenceplateCarType(licence, {from: account}).then(function(value) {
               console.log(value);
@@ -242,9 +177,7 @@ function getLicenceplateCarType(licence){
               console.log("Error getting manu");
           });
       }
-      //read functions end
 
-      //write functions Start
 function createLicenceplate(name, car_id){
     lp.createLicenceplate(name, car_id, {from: account}).then(function() {
         console.log("Created: "+ name);
@@ -254,30 +187,7 @@ function createLicenceplate(name, car_id){
         console.log("Error creating manu");
     });
 }
-      //write functions end
-//entity: Licenceplate end
-//enitiy: SoftwareUpdate
-        //read functions start
-function getSoftwareUpdate(id) {
-  su.getSoftwareUpdate.call(id, {from: account}).then(function(value) {
-    //logic
 
-  }).catch(function(e) {
-    console.log('There was a problem creating the software-update');
-  });
-
-}
-
-function getAllPendingUpdates(){
-  for(i = 0; i < su.getSoftwareUpdateCount; i++){
-    if(su.getSoftwareUpdate[i].isPending == true){
-      pendingUpdates.push(su.getSoftwareUpdate[i]);
-    }
-  }
-}
-        //read functions end
-
-        //write functions Start
 function createSoftwareUpdate(name, date, description, issue) {
   var name = document.getElementById('updateName').value;
   var date = document.getElementById('updateDate').value;
@@ -293,34 +203,6 @@ function createSoftwareUpdate(name, date, description, issue) {
     console.log('There was a problem creating the software-update');
   });
 }
-        //write functions end
-//entity: SoftwareUpdate end
-//enitiy: reviews
-        //read functions start
-function getReview(sid, rid) {
-  su.getReview(sid, rid, {from: account}).then(function(value) {
-    //logic
-
-  }).catch(function(e) {
-    console.log('There was a problem creating the software-update');
-  });
-
-}
-
-        //read functions end
-        //write functions start
-function setReview(id, desc, accepted){
-  su.addReviewToSoftwareUpdate(id, desc, accepted, {from: account}).then(function() {
-    //logic
-
-  }).catch(function(e) {
-    console.log(e);
-    console.log('There was a problem creating the software-update');
-  });
-}
-
-        //write functions end
-//entity: reviews end
 
 var xmlhttp = new XMLHttpRequest();
 var url = "http://192.168.1.182:9941/login"
@@ -334,7 +216,6 @@ function login() {
         xmlhttp.send(JSON.stringify({
             "email": username,
             "password": password
-
         }));
         xmlhttp.onreadystatechange = function(){
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -343,7 +224,6 @@ function login() {
               user = response;
               localStorage.user = JSON.stringify(user)
               if(user.type == "audit"){
-                //rdw
                 window.location.href = "/rdw.html";
               }
               else{
